@@ -17,31 +17,54 @@
 
     .card {
       background: #ffffff;
-      border-radius: 22px;
-      padding: 32px 28px;
+      border-radius: 24px;
+      padding: 34px 28px;
       text-align: center;
-      width: 85%;
-      max-width: 380px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      width: 88%;
+      max-width: 400px;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.15);
     }
 
-    .emoji {
-      font-size: 30px;
+    .icons {
+      font-size: 28px;
       margin-bottom: 6px;
     }
 
     h1 {
-      font-size: 18px;
-      margin-bottom: 10px;
+      font-size: 20px;
+      margin: 10px 0 6px;
       color: #333;
     }
 
-    #countdown {
-      font-size: 24px;
+    .date {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 18px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .time-box {
+      background: #fff6f9;
+      border-radius: 14px;
+      padding: 10px 4px;
+    }
+
+    .number {
+      font-size: 22px;
       font-weight: bold;
       color: #ff6f91;
-      margin: 18px 0;
-      line-height: 1.4;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #777;
+      margin-top: 2px;
     }
 
     .note {
@@ -52,25 +75,46 @@
 
     .footer {
       margin-top: 14px;
-      font-size: 12px;
-      color: #aaa;
+      font-size: 13px;
+      color: #ff8fab;
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <div class="emoji">🎄✨</div>
+    <div class="icons">🎄✨🤍</div>
 
-    <h1>距離可以見到倚涵 🤍</h1>
+    <h1>距離見到倚涵</h1>
+    <div class="date">2025 / 12 / 25&nbsp;&nbsp;08:00:00</div>
 
-    <div id="countdown">倒數中…</div>
-
-    <div class="note">
-      期待~
+    <div class="countdown">
+      <div class="time-box">
+        <div class="number" id="days">0</div>
+        <div class="label">天</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="hours">0</div>
+        <div class="label">小時</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="minutes">0</div>
+        <div class="label">分</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="seconds">0</div>
+        <div class="label">秒</div>
+      </div>
     </div>
 
-   
+    <div class="note">
+      不用急，慢慢走<br>
+      也會走到那一天
+    </div>
+
+    <div class="footer">
+      期待~
+    </div>
   </div>
 
   <script>
@@ -81,7 +125,10 @@
       const diff = targetTime - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerText = "現在 🤍";
+        document.getElementById("days").innerText = "0";
+        document.getElementById("hours").innerText = "0";
+        document.getElementById("minutes").innerText = "0";
+        document.getElementById("seconds").innerText = "0";
         return;
       }
 
@@ -90,8 +137,10 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("countdown").innerText =
-        `${days} 天 ${hours} 小時\n${minutes} 分 ${seconds} 秒`;
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
     }
 
     updateCountdown();
